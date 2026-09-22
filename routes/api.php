@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StatisticsController;
 
 //Rutas CRUD para la gestion de libros
 
@@ -52,4 +53,7 @@ Route::put('/users/{id}', [UserController::class, 'update']);
 
 //Permite eliminar un usuario
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+//Permite ver las estadisticas generadas
+Route::get('statistics', [StatisticsController::class, 'index']);
 

@@ -32,7 +32,7 @@ class BookRepository{
     }
 
     //Eliminar un libro
-    public function delete(Book $book):Bool{
-        return $book->delete();
+    public function delete(Book $book): bool{
+        return (bool) $book->delete();
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+use App\Models\Book;
 use App\Repositories\BookRepository;
 
 class BookService{
@@ -21,16 +22,16 @@ class BookService{
 
     //Crea un libro
     public function create(array $data): Book{
-        return $this->BookRepository->create($data);
+        return $this->bookRepository->create($data);
     }
 
     //Actualiza un libro
     public function update(Book $book, array $data): Book{
-        return $this->BookRepository->update($book, $data);
+        return $this->bookRepository->update($book, $data);
     }
 
     //Eliminar un libro
     public function delete (Book $book): bool{
-        return $this->BookRepository->delete($book);
+        return $this->bookRepository->delete($book);
     }
 }

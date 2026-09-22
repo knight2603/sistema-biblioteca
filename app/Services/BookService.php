@@ -3,6 +3,9 @@
 namespace App\Services;
 use App\Models\Book;
 use App\Repositories\BookRepository;
+use App\Models\Title;
+use App\Models\Author;
+use App\Models\Genre;
 
 class BookService{
     //Crea una nueva instancia del servicio
@@ -20,9 +23,27 @@ class BookService{
         return $this->bookRepository->findById($id);
     }
 
-    //Crea un libro
-    public function create(array $data): Book{
-        return $this->bookRepository->create($data);
+    //Crear un nuevo libro
+    public function create(array $data): Book
+    {
+        $title = Title::firstOrCreate([
+            'name' => $data['title'],
+        ]);
+
+        $author = Author::firstOrCreate([
+            'name' => $data['author'],
+        ]);
+
+        $genre = Genre::firstOrCreate([
+            'name' => $data['genre'],
+        ]);
+
+        return $this->bookRepository->create([
+            'title_id' => $title->id,
+            'author_id' => $author->id,
+            'genre_id' => $genre->id,
+            'available' => $data['available'] ?? true,
+        ]);
     }
 
     //Actualiza un libro

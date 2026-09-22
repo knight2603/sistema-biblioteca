@@ -6,6 +6,9 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\TitleController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\GenreController;
 
 //Rutas CRUD para la gestion de libros
 
@@ -56,4 +59,13 @@ Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 //Permite ver las estadisticas generadas
 Route::get('statistics', [StatisticsController::class, 'index']);
+
+//Permite llamar los titulos
+Route::get('titles', [TitleController::class, 'index']);
+
+//Permite llamar los autores
+Route::get('authors', [AuthorController::class, 'index']);
+
+//Permite llamar los generos
+Route::get('genres', [GenreController::class, 'index']);
 

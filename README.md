@@ -109,8 +109,3 @@ npm run build
 Github: https://github.com/knight2603/sistema-biblioteca
 =======
 
-
-
-## Pruebas
-El proyecto incluye pruebas automatizadas para las principales funcionalidades y reglas de negocio.
->>>>>>> feature/book-crud

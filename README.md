@@ -91,6 +91,7 @@ También se incluye un archivo SQL para importar la estructura y datos de prueba
 ## Instalación
 
 ### Backend
+<<<<<<< HEAD
 git clone https://github.com/knight2603/sistema-biblioteca.git
 cd sistema-biblioteca
 composer install
@@ -106,3 +107,10 @@ npm run build
 
 ## Git
 Github: https://github.com/knight2603/sistema-biblioteca
+=======
+
+
+
+## Pruebas
+El proyecto incluye pruebas automatizadas para las principales funcionalidades y reglas de negocio.
+>>>>>>> feature/book-crud

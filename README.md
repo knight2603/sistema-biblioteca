@@ -91,7 +91,6 @@ También se incluye un archivo SQL para importar la estructura y datos de prueba
 ## Instalación
 
 ### Backend
-<<<<<<< HEAD
 git clone https://github.com/knight2603/sistema-biblioteca.git
 cd sistema-biblioteca
 composer install

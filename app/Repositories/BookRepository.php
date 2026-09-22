@@ -24,11 +24,7 @@ class BookRepository{
     //Actualizar un libro
     public function update(Book $book, array $data): Book{
         $book->update($data);
-        return $book->fresh([
-            'title',
-            'author',
-            'genre',
-        ]);
+        return $book->fresh(['title', 'author', 'genre',]);
     }
 
     //Eliminar un libro

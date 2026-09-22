@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookRequest extends FormRequest
+class LoanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,12 @@ class BookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //Creamos las validaciones basicas
-            'title_id' => ['required', 'integer', 'exists:titles,id'],
-            'author_id' => ['required', 'integer', 'exists:authors,id'],
-            'genre_id' => ['required', 'integer', 'exists:genres,id'],
-            'available' => ['sometimes', 'boolean'],
+
+            //Creamos las validaciones de los prestamos
+            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'book_id' => ['required', 'integer', 'exists:books,id'],
+            'loan_date' => ['required', 'date'],
+            'return_date' => ['nullable', 'date', 'after_or_equal:loan_date'],
         ];
     }
 }

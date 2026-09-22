@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\LoanController;
 
 //Rutas CRUD para la gestion de libros
 
@@ -20,4 +21,19 @@ Route::put('/books/{id}', [BookController::class, 'update']);
 
 //Permite eliminar un libro
 Route::delete('/books/{id}', [BookController::class, 'destroy']);
+
+//Permite litar todos los prestamos
+Route::get('/loans', [LoanController::class, 'index']);
+
+//permite crear un nuevo prestamo
+Route::post('/loans', [LoanController::class, 'store']);
+
+//Permite mostrar un prestamo especifico
+Route::get('/loans/{id}', [LoanController::class, 'show']);
+
+//Permite actualizar un prestamo
+Route::put('/loans/{id}', [LoanController::class, 'update']);
+
+//Permite eliminar un prestamo
+Route::delete('/loans/{id}', [LoanController::class, 'destroy']);
 

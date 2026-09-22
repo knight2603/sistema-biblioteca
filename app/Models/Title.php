@@ -11,6 +11,7 @@ class Title extends Model
         'name',
     ];
 
+    //Un registro puede tener muchos libros asociados
     public function books(): HasMany{
         return $this->hasMany(Book::class);
     }

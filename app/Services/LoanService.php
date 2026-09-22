@@ -70,7 +70,7 @@ class LoanService
         return DB::transaction(function() use ($loan, $data){
             
         //Verificar que el prestamo no haya sido devuelto 
-        if(!empty($data['return_date']) && $loan->return_date !== null){
+        if (!empty($data['return_date']) && $loan->return_date) {
             abort(
                 409,
                 'El prestamo ya fue devuelto.'

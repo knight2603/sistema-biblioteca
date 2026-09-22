@@ -47,8 +47,26 @@ class BookService{
     }
 
     //Actualiza un libro
-    public function update(Book $book, array $data): Book{
-        return $this->bookRepository->update($book, $data);
+    public function update(Book $book, array $data): Book
+    {
+        $title = Title::firstOrCreate([
+            'name' => $data['title'],
+        ]);
+
+        $author = Author::firstOrCreate([
+            'name' => $data['author'],
+        ]);
+
+        $genre = Genre::firstOrCreate([
+            'name' => $data['genre'],
+        ]);
+
+        return $this->bookRepository->update($book, [
+            'title_id' => $title->id,
+            'author_id' => $author->id,
+            'genre_id' => $genre->id,
+            'available' => $data['available'] ?? $book->available,
+        ]);
     }
 
     //Eliminar un libro

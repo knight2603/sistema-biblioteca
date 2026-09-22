@@ -58,11 +58,14 @@ class UserController extends Controller
 
 
     //Permite eliminar un usuario
-    public function destroy(User $user):JsonResponse{
+    public function destroy(int $id): JsonResponse
+    {
+        $user = $this->userService->findById($id);
+
         $this->userService->delete($user);
 
         return response()->json([
-            'message'=> 'User deleted successfully',
+            'message' => 'User deleted successfully',
         ]);
     }
 }

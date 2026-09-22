@@ -63,11 +63,14 @@ class BookController extends Controller
 
 
     //Elimina un libro del sistema
-    public function destroy(Book $book):JsonResponse{
+    public function destroy(int $id): JsonResponse
+    {
+        $book = $this->bookService->findById($id);
+
         $this->bookService->delete($book);
 
         return response()->json([
-        'message' =>'Book deleted successfully',
+            'message' => 'Book deleted successfully',
         ]);
     }
 }

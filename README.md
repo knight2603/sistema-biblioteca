@@ -1,59 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Biblioteca
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema web para gestionar una biblioteca.
 
-## About Laravel
+La aplicación permite gestionar libros, usuarios, préstamos y devoluciones, además de consultar estadísticas de la biblioteca.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tecnologías
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Backend
+- PHP 8.2.12
+- Laravel 12.69.2
+- MariaDB / MySQL
+- PHPUnit / Pest
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Frontend
+- React
+- Vite
+- JavaScript
+- React Router
+- Font Awesome
+- HTML5
+- CSS3
 
-## Learning Laravel
+## Funcionalidades
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- CRUD completo de libros.
+- CRUD de usuarios.
+- Gestión de préstamos y devoluciones.
+- Control de disponibilidad de libros.
+- Máximo de 3 préstamos activos por usuario.
+- Validaciones en formularios y API.
+- Estadísticas generales de la biblioteca.
+- Interfaz responsiva y accesible.
+- Manejo de errores en el consumo de la API.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Reglas de negocio
 
-## Laravel Sponsors
+- Un libro no puede prestarse si no está disponible.
+- Un usuario puede tener máximo 3 préstamos activos.
+- Un préstamo devuelto no puede volver a devolverse.
+- Al prestar un libro, su disponibilidad cambia automáticamente.
+- Al devolverlo, vuelve a estar disponible.
+- Los préstamos y devoluciones utilizan transacciones de base de datos.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Arquitectura
 
-### Premium Partners
+El backend utiliza separación de responsabilidades:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **Controller:** recibe las peticiones HTTP y devuelve respuestas.
+- **Service:** contiene la lógica de negocio.
+- **Repository:** centraliza el acceso a datos.
+- **Model:** representa las entidades y relaciones mediante Eloquent ORM.
+- **Database:** MariaDB / MySQL.
 
-## Contributing
+## API
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Libros
+- `GET /api/books` - Listar libros.
+- `POST /api/books` - Crear libro.
+- `GET /api/books/{id}` - Consultar libro.
+- `PUT /api/books/{id}` - Actualizar libro.
+- `DELETE /api/books/{id}` - Eliminar libro.
 
-## Code of Conduct
+### Usuarios
+- `GET /api/users` - Listar usuarios.
+- `POST /api/users` - Crear usuario.
+- `GET /api/users/{id}` - Consultar usuario.
+- `PUT /api/users/{id}` - Actualizar usuario.
+- `DELETE /api/users/{id}` - Eliminar usuario.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Préstamos
+- `GET /api/loans` - Listar préstamos.
+- `POST /api/loans` - Crear préstamo.
+- `GET /api/loans/{id}` - Consultar préstamo.
+- `PUT /api/loans/{id}` - Actualizar préstamo.
+- `DELETE /api/loans/{id}` - Eliminar préstamo.
 
-## Security Vulnerabilities
+### Estadísticas
+- `GET /api/statistics` - Obtener estadísticas.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Base de datos
 
-## License
+Las migraciones se encuentran en:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+`database/migrations/`
+
+También se incluye un archivo SQL para importar la estructura y datos de prueba:
+
+`database/mibiblioteca.sql`
+
+## Instalación
+
+### Backend
+
+
+
+## Pruebas
+El proyecto incluye pruebas automatizadas para las principales funcionalidades y reglas de negocio.

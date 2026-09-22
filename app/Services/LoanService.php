@@ -5,6 +5,8 @@ use App\Models\Loan;
 use App\Repositories\LoanRepository;
 use App\Models\Book;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 class LoanService
 {
@@ -36,22 +38,24 @@ class LoanService
 
         // Revisar la disponibilidad
         if (!$book->available) {
-            throw new \Exception(
-                'El libro no está disponible para préstamo.');
+            abort(
+                409,
+                'El libro no está disponible para prestamo.');
             }
 
-        // Contar préstamos activos del usuario
+        // Contar prestamos activos del usuario
         $activeLoans = Loan::where('user_id', $data['user_id'])
             ->whereNull('return_date')
             ->count();
 
-        // Máximo 3 préstamos activos
+        // Maximo 3 prestamos activos
         if ($activeLoans >= 3) {
-            throw new \Exception(
-                'El usuario ya tiene el máximo de 3 préstamos activos.');
+            abort(
+                409,
+                'El usuario ya tiene el maximo de 3 prestamos activos.');
             }
 
-            // Crear el préstamo
+            // Crear el prestamo
             $loan = $this->loanRepository->create($data);
 
             // Cambia el estado del libro como no disponible
@@ -63,7 +67,31 @@ class LoanService
 
     //Actualizar un prestamo
     public function update(Loan $loan, array $data){
-        return $this->loanRepository->update($loan, $data);
+        return DB::transaction(function() use ($loan, $data){
+            
+        //Verificar que el prestamo no haya sido devuelto 
+        if(!empty($data['return_date']) && $loan->return_date !== null){
+            abort(
+                409,
+                'El prestamo ya fue devuelto.'
+            );
+        }
+
+        //Actualizar el estado del prestamo
+        $loan = $this->loanRepository->update(
+            $loan,
+            $data
+        );
+
+        //Si se registro una devolucioon liberar el libro
+        if(!empty($data['return_date'])){
+            $book = Book::findOrFail($loan->book_id);
+
+            $book->update([ 'available' => true, ]);
+        }
+
+        return $loan->load(['user', 'book',]);
+        });
     }
 
     //Eliminar un prestamo
